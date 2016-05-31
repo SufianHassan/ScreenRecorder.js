@@ -27,9 +27,20 @@ var Observer = new MutationObserver(function(list) {
 	var existingNodes = document.getElementsByTagName('*');
 	listenOnNodes(existingNodes);
 	if(ROOT_ELEMENT.type == 'tagName') {
-		rootNode = document.getElementByTagName(ROOT_ELEMENT);		
+		rootNode = document.getElementsByTagName(ROOT_ELEMENT.value);		
+	} else if(ROOT_ELEMENT.type == 'id') {
+		rootNode = document.getElementById(ROOT_ELEMENT.value);
+	} else if(ROOT_ELEMENT.type == 'name') {
+		rootNode = document.getElementsByName(ROOT_ELEMENT.value);
 	}
-	Observer.observe(rootNode, observerConfig);	
+	if(rootNode instanceof Array) {
+		for(var index = 0; index < rootNode.length; index++) {
+			var aRootNode = rootNode[index];
+			Observer.observe(aRootNode, observerConfig);	
+		}
+	} else {
+		Observer.observe(rootNode, observerConfig);	
+	}	
 }());
 
 
