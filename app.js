@@ -14,11 +14,6 @@ var eventTypes = ['click', 'keypress', 'dblclick', 'drag'];
  */
 var scriptActions = [];
 
-(function registerExistingNodes(){
-	var existingNodes = document.getElementsByTagName("*");
-	listenOnNodes(existingNodes);
-}());
-
 var observerConfig = { attributes: true, childList: true, characterData: true };
 
 var Observer = new MutationObserver(function(list) {
@@ -26,6 +21,16 @@ var Observer = new MutationObserver(function(list) {
 		listenOnNodes(mutation.addedNodes);
 	})
 });
-var rootNode = document.getElementById(ROOT_ELEMENT);
-Observer.observe(rootNode, observerConfig);
+
+(function startListening()){
+	var rootNode = '';
+	var existingNodes = document.getElementsByTagName('*');
+	listenOnNodes(existingNodes);
+	if(ROOT_ELEMENT.type == 'tagName') {
+		rootNode = document.getElementById(ROOT_ELEMENT);		
+	}
+	Observer.observe(rootNode, observerConfig);	
+}());
+
+
 
