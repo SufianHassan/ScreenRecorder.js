@@ -19,7 +19,6 @@ function repeatAction(action) {
  * return true if successfully finished
  */
 function beginPlayback(sequence, playbackConfig) {
-	playbackConfig = playbackConfig | 
 	if(sequence.length == 0) {
 		return true;
 	}
