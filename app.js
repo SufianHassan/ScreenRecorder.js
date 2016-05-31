@@ -27,7 +27,7 @@ var Observer = new MutationObserver(function(list) {
 	var existingNodes = document.getElementsByTagName('*');
 	listenOnNodes(existingNodes);
 	if(ROOT_ELEMENT.type == 'tagName') {
-		rootNode = document.getElementById(ROOT_ELEMENT);		
+		rootNode = document.getElementByTagName(ROOT_ELEMENT);		
 	}
 	Observer.observe(rootNode, observerConfig);	
 }());
