@@ -24,12 +24,35 @@ var Observer = new MutationObserver(function(list) {
 
 (function startListening()){
 	var rootNode = '';
+	//TODO we have to ensure our existing nodes we listen to are children of or are the rootNodes
 	var existingNodes = document.getElementsByTagName('*');
 	listenOnNodes(existingNodes);
+	
 	if(ROOT_ELEMENT.type == 'tagName') {
-		rootNode = document.getElementById(ROOT_ELEMENT);		
+		rootNode = document.getElementsByTagName(ROOT_ELEMENT.value);		
+		if(rootNode.length > 1) {
+			//TODO THROW ERROR - ROOT_ELEMENT NOT UNIQUE
+		} else {
+			rootNode = rootNode[0];
+		}
+	} else if(ROOT_ELEMENT.type == 'id') {
+		rootNode = document.getElementById(ROOT_ELEMENT.value);
+	} else if(ROOT_ELEMENT.type == 'name') {
+		rootNode = document.getElementsByName(ROOT_ELEMENT.value);
+		if(rootNode.length > 1) {
+			//TODO THROW ERROR - ROOT_ELEMENT NOT UNIQUE
+		} else {
+			rootNode = rootNode[0];
+		}
 	}
-	Observer.observe(rootNode, observerConfig);	
+	if(rootNode instanceof Array) {
+		for(var index = 0; index < rootNode.length; index++) {
+			var aRootNode = rootNode[index];
+			Observer.observe(aRootNode, observerConfig);	
+		}
+	} else {
+		Observer.observe(rootNode, observerConfig);	
+	}	
 }());
 
 
