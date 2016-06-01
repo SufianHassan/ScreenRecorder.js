@@ -19,7 +19,7 @@ var observerConfig = { attributes: true, childList: true, characterData: true };
 var Observer = new MutationObserver(function(list) {
 	list.forEach(function(mutation) {
 		listenOnNodes(mutation.addedNodes);
-	})
+	});
 });
 
 (function startListening()){
