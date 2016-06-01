@@ -1,3 +1,5 @@
+var self = require("sdk/self");
+
 //the root element the script is focusing on, default it to body? or make a pop up requesting user to select
 var ROOT_ELEMENT = {type: 'tagName', value: 'body'};
 var recordingLocked = false;
@@ -19,7 +21,7 @@ var observerConfig = { attributes: true, childList: true, characterData: true };
 var Observer = new MutationObserver(function(list) {
 	list.forEach(function(mutation) {
 		listenOnNodes(mutation.addedNodes);
-	});
+	})
 });
 
 (function startListening()){
@@ -57,3 +59,13 @@ var Observer = new MutationObserver(function(list) {
 
 
 
+
+
+
+// a dummy function, to show how tests work.
+// to see how to test this function, look at test/test-index.js
+function dummy(text, callback) {
+  callback(text);
+}
+
+exports.dummy = dummy;
