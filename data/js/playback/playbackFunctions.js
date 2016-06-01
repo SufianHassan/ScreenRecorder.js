@@ -19,10 +19,6 @@ function repeatAction(action) {
  * return true if successfully finished
  */
 function beginPlayback(sequence, playbackConfig) {
-<<<<<<< HEAD
-=======
-	playbackConfig = playbackConfig | 
->>>>>>> firefox
 	if(sequence.length == 0) {
 		return true;
 	}
