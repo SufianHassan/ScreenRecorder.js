@@ -1,8 +1,9 @@
 var self = require("sdk/self");
 var tabs = require("sdk/tabs");
 var data = require("sdk/self").data;
+var panel = require("sdk/panel");
 
-var text_entry = require("sdk/panel").Panel({
+var mainModal = panel.Panel({
   contentURL: data.url("partials/container.html"),
   contentScriptFile: [data.url("js/container.js"), data.url("js/recording/recordingFunctions.js"), data.url("js/app.js")]
 });
@@ -19,11 +20,10 @@ var button = require('sdk/ui/button/action').ActionButton({
 });
 
 function handleClick(state) {
-  text_entry.show();
+  mainModal.show();
 }
 
-// a dummy function, to show how tests work.
-// to see how to test this function, look at test/test-index.js
+// leave this here to eventually test stuff...
 function dummy(text, callback) {
   callback(text);
 }

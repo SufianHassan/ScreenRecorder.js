@@ -1,3 +1,36 @@
+
+// allows the user to click on the root element of the page
+function findRootElement(event) {
+  event.stopPropagation();
+  var existingNodes = document.getElementsByTagName('*');
+  
+  //remove the listener from all the page nodes
+  var removeListeners = function() {
+      for(var index = 0; index < existingNodes.length; index++) {
+          var node = existingNodes[index];			
+          node.removeEventListener('click', actualListener);
+      }
+  };
+  
+  var actualListener = function(event) {
+    event.stopPropagation();
+    ROOT_ELEMENT = event.target;
+    removeListeners();
+  };
+  
+  for(var index = 0; index < existingNodes.length; index++) {
+    var node = existingNodes[index];
+	node.addEventListener('click', actualListener);		
+  }
+}
+
+document.getElementById('newRecording').addEventListener('click', findRootElement);
+/**
+
+
+
+
+
 //the root element the script is focusing on, default it to body? or make a pop up requesting user to select
 var ROOT_ELEMENT = {type: 'tagName', value: 'body'};
 var recordingLocked = false;
@@ -11,7 +44,7 @@ var eventTypes = ['click', 'keypress', 'dblclick', 'drag'];
  *  eventDetails: '', // the event object that was captured
  *  node: '', // the node this event was captured on
  * }
- */
+ * /
 var scriptActions = [];
 
 var observerConfig = { attributes: true, childList: true, characterData: true };
@@ -56,3 +89,5 @@ function startListening(){
 }
 
 startListening();
+
+*/
