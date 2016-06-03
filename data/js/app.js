@@ -1,30 +1,54 @@
-//TODO how do we want to execute the recording? How about run the function and set the config/parameters on the obj?
-function runRecording() {
-  var ROOT_ELEMENT;
-}
+//TODO this will eventually be a WebWorker
+var RecordingThread = {
+  
+  findRootElement: function(event) {
+    event.stopPropagation();
+    selectRootElement(this.config, this.start);
+  },
+  
+  start: function(){    
+    
+  },
+  stop: function() {},
+  pause: function() {},
+  script: [],
+  config: {
+    //this is multiplied by the wait times between actions in order to speed up/slow down play back
+    waitMultiplier: 1.0, 
+    //this is the container for which we watch all dom mutations and record interactions with
+    rootElement: null, 
+    //this will ensure strict compliance to watching only for events the tag type typically handles. Button -> clicks, Text input ->keypress, Radio/Slect -> toggle/value change
+    qualifyNodes: false, 
+    //if true all listeners attached by the pages javascript will automatically qualify that element for that event type. this gives us the flexibility to adapt to pretty strange coding practices
+    existingListenerQualifies: false 
+  } 
+};
 
-
-
-
-
-// allows the user to click on the root element of the page
-function findRootElement(event) {
-  event.stopPropagation();
+function selectRootElement() {  
   var existingNodes = document.getElementsByTagName('*');
   
-  //remove the listener from all the page nodes
   var removeListeners = function() {
-      for(var index = 0; index < existingNodes.length; index++) {
-          var node = existingNodes[index];			
-          node.removeEventListener('click', actualListener);
-      }
+    for(var index = 0; index < existingNodes.length; index++) {
+      var node = existingNodes[index];			
+      node.removeEventListener('click', actualListener);
+    }
   };
   
-  var actualListener = function(event) {
-    event.stopPropagation();
-    ROOT_ELEMENT = event.target;
-    removeListeners();
-  };
+  
+  var buildActualListener = function(configOptions, startFunction) {
+    
+    return function(event) {
+      event.stopPropagation();
+      configOptions.rootElement = event.target;
+      if(this.config.rootElement == void 0 || !this.config.rootElement) {
+        //TODO throw error, alert, or something...
+        alert("<b>Sorry! It seems like the root Element has not been selected correctly :(</b>");
+        return;
+      }
+      removeListeners();
+      startFunction();
+    };
+  }
   
   for(var index = 0; index < existingNodes.length; index++) {
     var node = existingNodes[index];
@@ -32,7 +56,7 @@ function findRootElement(event) {
   }
 }
 
-document.getElementById('newRecordingBtn').addEventListener('click', findRootElement);
+document.getElementById('newRecordingBtn').addEventListener('click', RecordingThread.findRootElement);
 
 //TODO open prompt to have user select file from desktop
 function openLoadRecordingScreen(event) {}
@@ -72,38 +96,7 @@ var Observer = new MutationObserver(function(list) {
 	})
 });
 
-function startListening(){
-	var rootNode = '';
-	//TODO we have to ensure our existing nodes we listen to are children of or are the rootNodes
-	var existingNodes = document.getElementsByTagName('*');
-	listenOnNodes(existingNodes);
-	
-	if(ROOT_ELEMENT.type == 'tagName') {
-		rootNode = document.getElementsByTagName(ROOT_ELEMENT.value);		
-		if(rootNode.length > 1) {
-			//TODO THROW ERROR - ROOT_ELEMENT NOT UNIQUE
-		} else {
-			rootNode = rootNode[0];
-		}
-	} else if(ROOT_ELEMENT.type == 'id') {
-		rootNode = document.getElementById(ROOT_ELEMENT.value);
-	} else if(ROOT_ELEMENT.type == 'name') {
-		rootNode = document.getElementsByName(ROOT_ELEMENT.value);
-		if(rootNode.length > 1) {
-			//TODO THROW ERROR - ROOT_ELEMENT NOT UNIQUE
-		} else {
-			rootNode = rootNode[0];
-		}
-	}
-	if(rootNode instanceof Array) {
-		for(var index = 0; index < rootNode.length; index++) {
-			var aRootNode = rootNode[index];
-			Observer.observe(aRootNode, observerConfig);	
-		}
-	} else {
-		Observer.observe(rootNode, observerConfig);	
-	}	
-}
+
 
 startListening();
 
