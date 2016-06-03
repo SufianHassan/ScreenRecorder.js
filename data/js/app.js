@@ -1,3 +1,11 @@
+//TODO how do we want to execute the recording? How about run the function and set the config/parameters on the obj?
+function runRecording() {
+  var ROOT_ELEMENT;
+}
+
+
+
+
 
 // allows the user to click on the root element of the page
 function findRootElement(event) {
@@ -24,7 +32,17 @@ function findRootElement(event) {
   }
 }
 
-document.getElementById('newRecording').addEventListener('click', findRootElement);
+document.getElementById('newRecordingBtn').addEventListener('click', findRootElement);
+
+//TODO open prompt to have user select file from desktop
+function openLoadRecordingScreen(event) {}
+
+document.getElementById('loadRecordingBtn').addEventListener('click', openLoadRecordingScreen);
+
+//TODO open modal displaying the script's steps displayed in a table allowing the user to edit the steps
+function openEditRecordingScreen(event) {}
+
+document.getElementById('editRecordingBtn').addEventListener('click', openEditRecordingScreen);
 /**
 
 
@@ -32,7 +50,6 @@ document.getElementById('newRecording').addEventListener('click', findRootElemen
 
 
 //the root element the script is focusing on, default it to body? or make a pop up requesting user to select
-var ROOT_ELEMENT = {type: 'tagName', value: 'body'};
 var recordingLocked = false;
 //the current event types we know how to handle
 var eventTypes = ['click', 'keypress', 'dblclick', 'drag'];
