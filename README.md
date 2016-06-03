@@ -15,4 +15,5 @@ CURRENT FEATURES
 FUTURE FEATURES
 ----------------
 06/04/2016 - Script saving - save the script file to your desktop computer
+
 06/09/2016 - Script editing - view the collected interactions in detail in order to edit parameters. Also set configuration options such as wait multiplier, create script nodes to pull/generate dynamic data to conduct testing, and create a list of tests to perform in order to hit all your edge cases.
