@@ -18,11 +18,11 @@ This application requires [Node.js](https://nodejs.org/dist/v4.4.5/node-v4.4.5-x
 ###Instructions
 ---------------
 To run, open your command line and
-```bash
+```
 npm install --global jpm
 ```
 Then you need to change into the root of the plugin directory and
-```bash
+```
 jdm run
 ```
 
