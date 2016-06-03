@@ -1,29 +1,3 @@
-//TODO this will eventually be a WebWorker
-var RecordingThread = {
-  
-  findRootElement: function(event) {
-    event.stopPropagation();
-    selectRootElement(this.config, this.start);
-  },
-  
-  start: function(){    
-    
-  },
-  stop: function() {},
-  pause: function() {},
-  script: [],
-  config: {
-    //this is multiplied by the wait times between actions in order to speed up/slow down play back
-    waitMultiplier: 1.0, 
-    //this is the container for which we watch all dom mutations and record interactions with
-    rootElement: null, 
-    //this will ensure strict compliance to watching only for events the tag type typically handles. Button -> clicks, Text input ->keypress, Radio/Slect -> toggle/value change
-    qualifyNodes: false, 
-    //if true all listeners attached by the pages javascript will automatically qualify that element for that event type. this gives us the flexibility to adapt to pretty strange coding practices
-    existingListenerQualifies: false 
-  } 
-};
-
 function selectRootElement() {  
   var existingNodes = document.getElementsByTagName('*');
   
@@ -62,11 +36,6 @@ document.getElementById('newRecordingBtn').addEventListener('click', RecordingTh
 function openLoadRecordingScreen() {
   console.log("here");
 }
-
-$('.loadRecording').submit(function(){
-  $.preventDefault();
-  console.log("here");
-})
 
 //document.getElementById('loadRecordingBtn').addEventListener('click', openLoadRecordingScreen);
 
