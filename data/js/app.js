@@ -56,19 +56,14 @@ function selectRootElement() {
   }
 }
 
-document.getElementById('newRecordingBtn').addEventListener('click', RecordingThread.findRootElement);
+//document.getElementById('newRecordingBtn').addEventListener('click', RecordingThread.findRootElement);
 
 //TODO open prompt to have user select file from desktop
-function openLoadRecordingScreen() {
-  console.log("here");
-}
+function openLoadRecordingScreen(){
+  console.log(document.getElementById('loadRecording.firstname'));
+};
 
-// $('.loadRecording').submit(function(){
-//   $.preventDefault();``
-//   console.log("here");
-// })
-
-document.getElementById('loadRecordingBtn').addEventListener('click', openLoadRecordingScreen);
+document.getElementById('loadRecording').addEventListener('click', openLoadRecordingScreen);
 
 //TODO open modal displaying the script's steps displayed in a table allowing the user to edit the steps
 function openEditRecordingScreen(event) {
