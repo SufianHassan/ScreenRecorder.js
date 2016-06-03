@@ -1,5 +1,9 @@
 <div id="myPluginContainer">
 	<button id="newRecordingBtn">Create Script</button> <br />
+	<form id="loadRecording" method="POST" enctype="multipart/form" action="">
+  	Select a script: <input type="file" name="uploadedScript">
+  	<input type="button" name="loadExistingRecButton" value="Load Recording" onclick="openLoadRecordingScreen()">
+	</form>
 	<button id="loadRecordingBtn">Load Script</button> <br />
 	<button id="editRecordingBtn">Edit Existing Script</button> <br />
 	<button id="helpBtn">Get Help</button>

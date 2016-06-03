@@ -11,33 +11,40 @@ function runRecording() {
 function findRootElement(event) {
   event.stopPropagation();
   var existingNodes = document.getElementsByTagName('*');
-  
+
   //remove the listener from all the page nodes
   var removeListeners = function() {
       for(var index = 0; index < existingNodes.length; index++) {
-          var node = existingNodes[index];			
+          var node = existingNodes[index];
           node.removeEventListener('click', actualListener);
       }
   };
-  
+
   var actualListener = function(event) {
     event.stopPropagation();
     ROOT_ELEMENT = event.target;
     removeListeners();
   };
-  
+
   for(var index = 0; index < existingNodes.length; index++) {
     var node = existingNodes[index];
-	node.addEventListener('click', actualListener);		
+	node.addEventListener('click', actualListener);
   }
 }
 
 document.getElementById('newRecordingBtn').addEventListener('click', findRootElement);
 
 //TODO open prompt to have user select file from desktop
-function openLoadRecordingScreen(event) {}
+function openLoadRecordingScreen() {
+  console.log("here");
+}
 
-document.getElementById('loadRecordingBtn').addEventListener('click', openLoadRecordingScreen);
+$('.loadRecording').submit(function(){
+  $.preventDefault();
+  console.log("here");
+})
+
+//document.getElementById('loadRecordingBtn').addEventListener('click', openLoadRecordingScreen);
 
 //TODO open modal displaying the script's steps displayed in a table allowing the user to edit the steps
 function openEditRecordingScreen(event) {}
@@ -56,7 +63,7 @@ var eventTypes = ['click', 'keypress', 'dblclick', 'drag'];
 /**
  * The list of actions our output script will perform
  * Format: {
- *	wait: '', // the time to wait before executing this action (multiplied by the user specified speed weight) 
+ *	wait: '', // the time to wait before executing this action (multiplied by the user specified speed weight)
  *  eventType: '', // the type of event that was captured
  *  eventDetails: '', // the event object that was captured
  *  node: '', // the node this event was captured on
@@ -77,9 +84,9 @@ function startListening(){
 	//TODO we have to ensure our existing nodes we listen to are children of or are the rootNodes
 	var existingNodes = document.getElementsByTagName('*');
 	listenOnNodes(existingNodes);
-	
+
 	if(ROOT_ELEMENT.type == 'tagName') {
-		rootNode = document.getElementsByTagName(ROOT_ELEMENT.value);		
+		rootNode = document.getElementsByTagName(ROOT_ELEMENT.value);
 		if(rootNode.length > 1) {
 			//TODO THROW ERROR - ROOT_ELEMENT NOT UNIQUE
 		} else {
@@ -98,11 +105,11 @@ function startListening(){
 	if(rootNode instanceof Array) {
 		for(var index = 0; index < rootNode.length; index++) {
 			var aRootNode = rootNode[index];
-			Observer.observe(aRootNode, observerConfig);	
+			Observer.observe(aRootNode, observerConfig);
 		}
 	} else {
-		Observer.observe(rootNode, observerConfig);	
-	}	
+		Observer.observe(rootNode, observerConfig);
+	}
 }
 
 startListening();
