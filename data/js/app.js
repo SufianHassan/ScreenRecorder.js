@@ -1,42 +1,42 @@
 //TODO this will eventually be a WebWorker
 var RecordingThread = {
-  
+
   findRootElement: function(event) {
     event.stopPropagation();
     selectRootElement(this.config, this.start);
   },
-  
-  start: function(){    
-    
+
+  start: function(){
+
   },
   stop: function() {},
   pause: function() {},
   script: [],
   config: {
     //this is multiplied by the wait times between actions in order to speed up/slow down play back
-    waitMultiplier: 1.0, 
+    waitMultiplier: 1.0,
     //this is the container for which we watch all dom mutations and record interactions with
-    rootElement: null, 
+    rootElement: null,
     //this will ensure strict compliance to watching only for events the tag type typically handles. Button -> clicks, Text input ->keypress, Radio/Slect -> toggle/value change
-    qualifyNodes: false, 
+    qualifyNodes: false,
     //if true all listeners attached by the pages javascript will automatically qualify that element for that event type. this gives us the flexibility to adapt to pretty strange coding practices
-    existingListenerQualifies: false 
-  } 
+    existingListenerQualifies: false
+  }
 };
 
-function selectRootElement() {  
+function selectRootElement() {
   var existingNodes = document.getElementsByTagName('*');
-  
+
   var removeListeners = function() {
     for(var index = 0; index < existingNodes.length; index++) {
-      var node = existingNodes[index];			
+      var node = existingNodes[index];
       node.removeEventListener('click', actualListener);
     }
   };
-  
-  
+
+
   var buildActualListener = function(configOptions, startFunction) {
-    
+
     return function(event) {
       event.stopPropagation();
       configOptions.rootElement = event.target;
@@ -49,7 +49,7 @@ function selectRootElement() {
       startFunction();
     };
   }
-  
+
   for(var index = 0; index < existingNodes.length; index++) {
     var node = existingNodes[index];
 	node.addEventListener('click', actualListener);
@@ -71,7 +71,9 @@ $('.loadRecording').submit(function(){
 //document.getElementById('loadRecordingBtn').addEventListener('click', openLoadRecordingScreen);
 
 //TODO open modal displaying the script's steps displayed in a table allowing the user to edit the steps
-function openEditRecordingScreen(event) {}
+function openEditRecordingScreen(event) {
+  console.log("Hello!");
+}
 
 document.getElementById('editRecordingBtn').addEventListener('click', openEditRecordingScreen);
 /**
