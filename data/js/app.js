@@ -63,12 +63,12 @@ function openLoadRecordingScreen() {
   console.log("here");
 }
 
-$('.loadRecording').submit(function(){
-  $.preventDefault();
-  console.log("here");
-})
+// $('.loadRecording').submit(function(){
+//   $.preventDefault();``
+//   console.log("here");
+// })
 
-//document.getElementById('loadRecordingBtn').addEventListener('click', openLoadRecordingScreen);
+document.getElementById('loadRecordingBtn').addEventListener('click', openLoadRecordingScreen);
 
 //TODO open modal displaying the script's steps displayed in a table allowing the user to edit the steps
 function openEditRecordingScreen(event) {
