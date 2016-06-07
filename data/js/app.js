@@ -25,6 +25,8 @@ var RecordingThread = {
 };
 
 function selectRootElement() {
+
+function selectRootElement() {
   var existingNodes = document.getElementsByTagName('*');
 
   var removeListeners = function() {
@@ -48,7 +50,7 @@ function selectRootElement() {
       removeListeners();
       startFunction();
     };
-  }
+  };
 
   for(var index = 0; index < existingNodes.length; index++) {
     var node = existingNodes[index];
@@ -65,14 +67,22 @@ function openLoadRecordingScreen(){
 
 document.getElementById('loadRecording').addEventListener('click', openLoadRecordingScreen);
 
+function openLoadRecordingScreen() {
+  console.log("here");
+}
+
+//document.getElementById('loadRecordingBtn').addEventListener('click', openLoadRecordingScreen);
+
+
 //TODO open modal displaying the script's steps displayed in a table allowing the user to edit the steps
 function openEditRecordingScreen(event) {
   console.log("Hello!");
-}
+};
 
 document.getElementById('editRecordingBtn').addEventListener('click', openEditRecordingScreen);
-/**
 
+}
+/**
 
 
 
