@@ -23,7 +23,7 @@ npm install --global jpm
 ```
 Then you need to change into the root of the plugin directory and
 ```
-jdm run
+jpm run
 ```
 
 ###FUTURE FEATURES
