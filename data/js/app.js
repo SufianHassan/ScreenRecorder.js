@@ -1,17 +1,5 @@
-function selectRootElement() {  
-  var existingNodes = document.getElementsByTagName('*');
-  
-  var removeListeners = function() {
-    for(var index = 0; index < existingNodes.length; index++) {
-      var node = existingNodes[index];			
-      node.removeEventListener('click', actualListener);
-    }
-  };
-  
-  
-  var buildActualListener = function(configOptions, startFunction) {
-    
-    return function(event) {
+var buildActualListener = function(configOptions, startFunction) {
+	return function(event) {
       event.stopPropagation();
       configOptions.rootElement = event.target;
       if(this.config.rootElement == void 0 || !this.config.rootElement) {
@@ -22,29 +10,39 @@ function selectRootElement() {
       removeListeners();
       startFunction();
     };
-  }
-  
+  };
+
   for(var index = 0; index < existingNodes.length; index++) {
     var node = existingNodes[index];
 	node.addEventListener('click', actualListener);
   }
 }
 
-document.getElementById('newRecordingBtn').addEventListener('click', RecordingThread.findRootElement);
+//document.getElementById('newRecordingBtn').addEventListener('click', RecordingThread.findRootElement);
 
 //TODO open prompt to have user select file from desktop
+function openLoadRecordingScreen(){
+  console.log(document.getElementById('loadRecording.firstname'));
+};
+
+document.getElementById('loadRecording').addEventListener('click', openLoadRecordingScreen);
+
 function openLoadRecordingScreen() {
   console.log("here");
 }
 
 //document.getElementById('loadRecordingBtn').addEventListener('click', openLoadRecordingScreen);
 
+
 //TODO open modal displaying the script's steps displayed in a table allowing the user to edit the steps
-function openEditRecordingScreen(event) {}
+function openEditRecordingScreen(event) {
+  console.log("Hello!");
+};
 
 document.getElementById('editRecordingBtn').addEventListener('click', openEditRecordingScreen);
-/**
 
+}
+/**
 
 
 
